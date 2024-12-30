@@ -10,22 +10,20 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarTrigger,
-  useSidebar,
 } from "@/components/ui/sidebar";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import {
-  Calendar,
   ChevronUp,
   Home,
   Inbox,
   LogInIcon,
   LogOutIcon,
-  Search,
-  Settings,
+  TimerIcon,
   User2,
+  WorkflowIcon,
 } from "lucide-react";
 import {
   DropdownMenuContent,
@@ -40,13 +38,23 @@ import React from "react";
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/",
     icon: Home,
   },
   {
-    title: "Planner",
-    url: "#",
+    title: "Manager",
+    url: "/v1/manager_layout",
     icon: Inbox,
+  },
+  {
+    title: "Line Balance",
+    url: "/v1/cycle_times",
+    icon: TimerIcon,
+  },
+  {
+    title: "Planner",
+    url: "/v1/workdays",
+    icon: WorkflowIcon,
   },
   // {
   //   title: "Calendar",

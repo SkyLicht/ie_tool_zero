@@ -35,7 +35,7 @@ const WorkPlanForm = ({
 
   const router = useRouter();
 
-  // Handle input changes and update formValues
+  // Handle cycle_times changes and update formValues
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {

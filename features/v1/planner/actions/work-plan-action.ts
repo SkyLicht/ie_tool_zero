@@ -66,7 +66,7 @@ export const createWorkPlan = async (
   } catch (error) {
     console.error("Error creating work plan", error);
     return parseServerActionResponse({
-      error: error.message,
+      error: "",
       status: "ERROR",
     });
   }

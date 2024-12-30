@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindConfig from "tailwindcss/stubs/tailwind.config";
 
 export default {
   darkMode: ["class"],
@@ -15,6 +16,8 @@ export default {
         licht_surface: "var(--licht-surface)",
         licht_on_surface: "var(--licht-on-surface)",
         licht_secondary: "var(--licht-secondary)",
+        licht_card_bg: "var(--licht-card-bg)",
+        licht_interactive: "var(--licht-interactive)",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -46,7 +49,7 @@ export default {
           foreground: "hsl(var(--destructive-foreground))",
         },
         border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
+        input: "hsl(var(--cycle_times))",
         ring: "hsl(var(--ring))",
         chart: {
           "1": "hsl(var(--chart-1))",
@@ -71,7 +74,12 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        roboto: "var(--font-roboto)",
+        mono: "var(--font-roboto-mono)",
+        work_sans: "var(--font-work-sans)",
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;

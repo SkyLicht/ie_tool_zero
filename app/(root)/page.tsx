@@ -1,11 +1,12 @@
 import { auth } from "@/auth";
 import React from "react";
+import { DropList } from "@/components/licht-ui/drop-list";
 
 export default async function Home() {
   const session = await auth();
 
   if (!session) {
-    return <p>You are not logged in!</p>;
+    return <p className={"font-bold"}>You are not logged in!</p>;
   }
 
   return (
@@ -18,6 +19,17 @@ export default async function Home() {
         <div className="col-span-1 bg-green-200">3</div>
         <div className="col-span-1 bg-yellow-200">4</div>
         <div className="col-span-1 bg-purple-200">5</div>
+      </div>
+      <div className="font-roboto text-2xl">
+        Whereas disregard and contempt for human rights have resulted
+      </div>
+
+      <div className="font-mono text-2xl">
+        Whereas disregard and contempt for human rights have resulted
+      </div>
+
+      <div className="font-work_sans text-2xl">
+        Whereas disregard and contempt for human rights have resulted
       </div>
     </div>
   );

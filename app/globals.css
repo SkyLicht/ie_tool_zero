@@ -81,7 +81,8 @@ body {
     --licht-surface: #2f2f2f;
     --licht-on-surface: #0d0d0d;
     --licht-secondary: #171717;
-    --licht-primary-text: #FFFFFF;
+    --licht-interactive: #FFFDFD;
+    --licht-primary-text: #fffdfd;
     --licht-secondary-text: #A6A6A6;
     --licht-accent-color: #10A37F;
     --licht-link-color: #58A6FF;
@@ -105,4 +106,60 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 6px;
+}
+.blue-scroll::-webkit-scrollbar-thumb {
+  @apply bg-blue-600 rounded-xl;
+}
+
+@layer utilities {
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+
+  .card-container {
+    @apply bg-licht_card_bg rounded-lg shadow-lg p-2;
+  }
+  .card_title {
+    @apply text-lg font-roboto font-bold text-neutral-200;
+  }
+
+  .card_text {
+      @apply text-base font-roboto font-normal text-neutral-300;
+  }
+
+  .card_footer {
+    @apply text-sm font-roboto font-normal text-neutral-300;
+  }
+
+  .container {
+    @apply bg-licht_surface p-2   rounded-lg ;
+  }
+
+  .flex-vertical {
+    @apply flex flex-col;
+  }
+
+  .btn_primary {
+    @apply bg-licht_interactive  text-sm font-medium text-primary-foreground h-8  px-2 rounded-md border-0 focus:outline-none focus:ring-0 focus:ring-offset-0 focus:ring-transparent;
+  }
+
+  .card_text_heading {
+    @apply text-2xl font-roboto font-bold;
+  }
+
+  .btn_command {
+    @apply bg-licht_interactive  text-sm font-medium text-primary-foreground h-8 w-8  px-2 rounded-md border-0 focus:outline-none focus:ring-0 focus:ring-offset-0 focus:ring-transparent;
+  }
+
+  .btn_ghost_command {
+    @apply bg-transparent  text-sm font-medium h-8 w-8  rounded-lg border-0 focus:outline-none focus:ring-0 focus:ring-offset-0 focus:ring-transparent hover:bg-licht_card_bg;
+  }
+
 }
