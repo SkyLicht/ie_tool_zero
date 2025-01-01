@@ -32,7 +32,6 @@ export const createWorkPlan = async (
       uph_i: uph_i,
       start_hour: "0",
       end_hour: "23",
-      date: new Date(str_date).getUTCDate(),
       str_date: str_date,
       week: WeekInfo.getWeekNumber(str_date),
       head_count: head_count,

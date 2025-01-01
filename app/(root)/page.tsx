@@ -1,6 +1,5 @@
 import { auth } from "@/auth";
 import React from "react";
-import { DropList } from "@/components/licht-ui/drop-list";
 
 export default async function Home() {
   const session = await auth();

@@ -16,18 +16,16 @@ const DaySelectorContainer = () => {
         year={2025}
         week={Number(week)}
         onWeekChange={(week) => {
-          router.push(
-            `?year=${2025}&week=${week}&selected_day=${selected_day}`,
-          );
+          router.push(`?year=${2025}&week=${week}`);
         }}
       />
       <DaysContainer
         year={2025}
         week={Number(week)}
         selected_day={selected_day}
-        onClick={(day) => {
+        onClick={(date, name) => {
           router.push(
-            `/v1/workdays/${day}?year=${2025}&week=${week}&selected_day=${day}`,
+            `/v1/workdays/${date}?year=${2025}&week=${week}&selected_day=${name}`,
           );
         }}
       />

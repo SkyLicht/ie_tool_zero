@@ -2,8 +2,8 @@
 import React from "react";
 import LayoutsContainer from "@/features/v1/manager/components/manager_layout/layouts-container";
 import { auth } from "@/auth";
-import { GET_ALL_LINES } from "@/lib/queries";
-import { FactoryLinesModel } from "@/features/types/factory-model";
+import { catchErrorTyped, customPackagedError } from "@/lib/licht-request";
+import { getLinesGroupedByFactoryV2 } from "@/features/request/line-request";
 
 const ManageLayoutPage = async () => {
   const session = await auth();
@@ -12,15 +12,20 @@ const ManageLayoutPage = async () => {
     return <p className={"font-bold"}>You are not logged in!</p>;
   }
 
-  const response = await fetch(GET_ALL_LINES, {
-    headers: { Authorization: `Bearer ${session?.user.token}` },
-  });
+  const [error, data] = await catchErrorTyped(
+    getLinesGroupedByFactoryV2(session.user.token),
+    [...customPackagedError, Error],
+  );
 
-  const factories: FactoryLinesModel[] = await response.json();
+  if (error) {
+    return (
+      <p className={"font-bold"}>An unexpected error occurred {error.name}</p>
+    );
+  }
 
   return (
     <section>
-      <LayoutsContainer factories={factories} />
+      <LayoutsContainer factories={data || []} />
     </section>
   );
 };

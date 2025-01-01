@@ -23,7 +23,7 @@ export function useFetchPlatforms() {
         });
 
         if (!response.ok) {
-          throw new Error("Failed to fetch platforms");
+          throw new Error("Failed to request platforms");
         }
 
         const data: Platform[] = await response.json();

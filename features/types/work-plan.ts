@@ -1,27 +1,4 @@
-export type Line = {
-  description: string | null;
-  name: string;
-  factory_id: string;
-  updated_at: string;
-  id: string;
-  is_active: boolean;
-  created_at: string;
-  factory: {
-    name: string;
-    id: string;
-  };
-};
-
-export type WorkDay = {
-  str_date: string;
-  date: string;
-  line_id: string;
-  id: string;
-  week: number;
-  line: Line;
-};
-
-export type Platform = {
+export type PlatformModel = {
   f_n: number;
   platform: string;
   uph: number;
@@ -35,7 +12,7 @@ export type Platform = {
   width: number;
 };
 
-export type WorkPlan = {
+export type WorkPlanModel = {
   id: string;
   work_day_id: string;
   platform_id: string;
@@ -55,5 +32,5 @@ export type WorkPlan = {
   uph_meta: number;
   commit: number;
   commit_full: number;
-  platform: Platform;
+  platform: PlatformModel;
 };

@@ -6,9 +6,9 @@ type Props = {
   year: number;
   week: number;
   selected_day: string | null;
-  onClick: (date: string) => void;
+  onClick: (date: string, name: string) => void;
 };
-const DaysContainer = ({ year, week, onClick }: Props) => {
+const DaysContainer = ({ year, week, onClick, selected_day }: Props) => {
   const selected_week = useMemo(() => {
     return WeekInfo.getWeekDays(week, year);
   }, [year, week]);
@@ -17,12 +17,16 @@ const DaysContainer = ({ year, week, onClick }: Props) => {
       {selected_week.map((day) => (
         <div key={`selected-week-${week}-${year}-${day.name}`}>
           <button
-            className={cn(
-              "bg-gradient-to-r from-blue-800 to-sky-600 p-2 rounded-lg text-white",
-            )}
-            onClick={() => onClick(day.date)}
+            className={cn("btn_secondary-surface", "")}
+            onClick={() => onClick(day.date, day.name)}
           >
-            <span>{day.name}</span>
+            {selected_day === day.name ? (
+              <span className="text-blue-400 text-base">
+                {day.name} {day.date}
+              </span>
+            ) : (
+              <span>{day.name}</span>
+            )}
           </button>
         </div>
       ))}

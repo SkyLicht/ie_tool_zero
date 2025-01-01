@@ -21,14 +21,10 @@ const WorkDayAddWorkPlan = ({
 
   return (
     <div className="flex flex-row justify-between ">
-      <h3>Work plan</h3>
+      <h3 className="text-lg font-semibold  ">Work plan</h3>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <button
-            role="button"
-            aria-expanded={open}
-            className="justify-between"
-          >
+          <button role="button" aria-expanded={open} className="btn_primary">
             <PlusIcon />
           </button>
         </PopoverTrigger>

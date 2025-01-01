@@ -1,10 +1,7 @@
 "use server";
 import React from "react";
 import { auth } from "@/auth";
-import {
-  GET_ALL_OPERATIONS_AREAS,
-  GET_ALL_WORK_PLANS_BY_WORK_DAY_ID,
-} from "@/lib/queries";
+import { GET_ALL_OPERATIONS_AREAS, GET_LAYOUT_BY_ID } from "@/lib/queries";
 import { AreaModel } from "@/features/types/area-model";
 import LayoutContainer from "@/features/v1/manager/components/manager_layout/layout-container";
 import { OperationModel } from "@/features/types/operation-model";
@@ -40,12 +37,9 @@ const ManageLayoutPage = async ({
     areas?: AreaModel[];
   } = await response_operations.json();
 
-  const layout_response = await fetch(
-    GET_ALL_WORK_PLANS_BY_WORK_DAY_ID(layout_id),
-    {
-      headers: { Authorization: `Bearer ${session?.user.token}` },
-    },
-  );
+  const layout_response = await fetch(GET_LAYOUT_BY_ID(layout_id), {
+    headers: { Authorization: `Bearer ${session?.user.token}` },
+  });
 
   if (layout_response.status === 401) {
     return <p className={"font-bold"}>You are not logged in!</p>;

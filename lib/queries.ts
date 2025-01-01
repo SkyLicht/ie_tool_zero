@@ -15,10 +15,14 @@ export const GET_LAYOUT_BY_ID = (id: string) => {
   return `${process.env.FASTAPI_URL}/api/v1/layout/get_layout_by_id?layout_id=${id}`;
 };
 
-export const GET_ALL_WORK_PLANS_BY_WORK_DAY_ID = (id: string) => {
-  return `${process.env.FASTAPI_URL}/api/v1/layout/get_layout?layout_id=${id}`;
+export const GET_ALL_WORK_PLANS_BY_WORK_DAY_ID = (
+  work_plan: string,
+  str_date: string,
+) => {
+  return `${process.env.FASTAPI_URL}/api/v1/planner/get_work_plan_by?str_date=${str_date}&work_day_id=${work_plan}`;
 };
 export const GET_ALL_LINES = `${process.env.FASTAPI_URL}/api/v1/layout/get_lines`;
+
 export const GET_STATIONS_BY_LAYOUT_ID = (id: string) => {
   return `${process.env.FASTAPI_URL}/api/v1/layout/get_stations_by_layout_id?layout_id=${id}`;
 };
