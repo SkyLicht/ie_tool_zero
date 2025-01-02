@@ -6,6 +6,7 @@ import { auth } from "@/auth";
 import { GET_ALL_LAYOUTS } from "@/lib/queries";
 import { LayoutModel } from "@/features/types/layout-model";
 import LayoutsView from "@/features/v1/manager/components/manager_layout/layouts-view";
+import CreateLayoutForm from "@/features/v1/manager/components/forms/create-layout-form";
 
 const LayoutsContainer = async ({
   factories,

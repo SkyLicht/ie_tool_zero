@@ -9,13 +9,15 @@ import {
 import { FactoryLinesModel } from "@/features/types/factory-model";
 import { LineModelShort } from "@/features/types/line-model";
 import Form from "next/form";
-import { createCycleTimesRecordAction } from "@/features/v1/actions/create-cycle-times-record-action";
-
+import { createLineBalance } from "@/features/v1/line_balance/actions/action-create-line_balance";
+import { toast } from "sonner";
+import { format } from "date-fns";
+import { getCurrentLocalDate } from "@/lib/date-utils";
+// todo: move to linne balance component folder
 type Props = {
   data: FactoryLinesModel[];
-  str_date: string;
 };
-const ActionLinesForm = ({ data, str_date }: Props) => {
+const ActionLinesForm = ({ data }: Props) => {
   const [open, setOpen] = React.useState(false);
   const [selectedLine, setSelectedLine] = React.useState<LineModelShort | null>(
     null,
@@ -29,18 +31,16 @@ const ActionLinesForm = ({ data, str_date }: Props) => {
           status: "ERROR",
         };
       }
-      const result = await createCycleTimesRecordAction(
-        prevState,
-        str_date,
-        selectedLine.id,
-      );
+      const result = await createLineBalance(prevState, selectedLine.id);
 
       if (result.status == "SUCCESS") {
-        console.log("Cycle times record created successfully");
+        toast.success("Line balance record created successfully");
       }
 
       if (result.status == "ERROR") {
-        console.log("An unexpected error occurred");
+        toast.error(result.error, {
+          description: result.error_massage.detail,
+        });
       }
 
       return result;

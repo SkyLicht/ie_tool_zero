@@ -27,6 +27,19 @@ export const GET_STATIONS_BY_LAYOUT_ID = (id: string) => {
   return `${process.env.FASTAPI_URL}/api/v1/layout/get_stations_by_layout_id?layout_id=${id}`;
 };
 
+export const LineManagerRequest = () => {
+  return {
+    SERVER: {
+      GET_LINE_BALANCES_BY_WEEK: (str_date: string) => {
+        return `${process.env.FASTAPI_URL}/api/v1/line_balance/get_all_by_week?str_date=${str_date}`;
+      },
+      CREATE_LINE_BALANCE: (str_date: string, line_id: string) => {
+        return `${process.env.FASTAPI_URL}/api/v1/line_balance/create?str_date=${str_date}&line_id=${line_id}`;
+      },
+    },
+  };
+};
+
 export const GET_ALL_LAYOUTS = `${process.env.FASTAPI_URL}/api/v1/layout/get_layouts`;
 // client
 

@@ -90,3 +90,7 @@ Week Days: [
   { name: 'Sunday', date: '2024-12-29' },
 ]
 */
+
+export function getCurrentLocalDate() {
+  return format(new Date().toLocaleDateString(), "yyyy-MM-dd");
+}

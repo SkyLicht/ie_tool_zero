@@ -5,6 +5,7 @@ import { auth } from "@/auth";
 import { getLinesGroupedByFactory } from "@/features/request/line-request";
 import { redirect } from "next/navigation";
 import { format } from "date-fns";
+import ViewLineBalance from "@/features/v1/line_balance/components/view-line-balance";
 
 const CycleTimePage = async ({
   searchParams,
@@ -13,11 +14,11 @@ const CycleTimePage = async ({
 }) => {
   // Check if the 'date' query param exists
   const { date } = await searchParams;
-  if (!date) {
-    redirect(
-      `/v1/cycle_times?date=${format(new Date().toLocaleDateString(), "yyyy-MM-dd")}`,
-    );
-  }
+  // if (!date) {
+  //   redirect(
+  //     `/v1/cycle_times?date=${format(new Date().toLocaleDateString(), "yyyy-MM-dd")}`,
+  //   );
+  // }
   const session = await auth();
 
   if (!session) {
@@ -31,11 +32,12 @@ const CycleTimePage = async ({
   }
 
   return (
-    <div className="w-full flex flex-col  ">
-      <div className="w-fit flex flex-row gap-4 items-center justify-between container">
-        <h3 className="card_title">Cycle Time</h3>
-        <ActionLinesForm data={responds.data || []} str_date={date} />
+    <div className="w-full h-full flex flex-col  gap-2 ">
+      <div className="w-full flex flex-row gap-4 items-center justify-between ">
+        <h3 className="card_title">Line Balances</h3>
+        <ActionLinesForm data={responds.data || []} />
       </div>
+      <ViewLineBalance token={session.user.token} />
     </div>
   );
 };

@@ -8,6 +8,11 @@ export class HTTP_401_Error extends Error {
   extraProp = "ERROR: test";
 }
 
+export class HTTP_404_Error extends Error {
+  name = "HTTP 404 Error";
+  extraProp = "ERROR: test";
+}
+
 export class ServerUnreachableError extends Error {
   name = "Server Unreachable Error";
   extraProp = "ERROR: test";
@@ -16,6 +21,7 @@ export class ServerUnreachableError extends Error {
 export const customPackagedError = [
   CustomError,
   HTTP_401_Error,
+  HTTP_404_Error,
   ServerUnreachableError,
 ];
 
