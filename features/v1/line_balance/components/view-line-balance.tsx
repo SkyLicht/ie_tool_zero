@@ -2,6 +2,7 @@ import React from "react";
 import { getLineBalancesByWeek } from "@/features/request/request-line_balance";
 import { catchErrorTyped, customPackagedError } from "@/lib/licht-request";
 import { format } from "date-fns";
+import Link from "next/link";
 
 type Props = {
   token: string;
@@ -21,13 +22,15 @@ const ViewLineBalance = async ({ token }: Props) => {
     );
   }
 
-  console.log(data);
-
   return (
-    <div className="grid grid-cols-3 boder">
+    <div className="grid grid-cols-3 gap-4 boder">
       {data.map((record) => {
         return (
-          <div key={record.id} className="surface_container">
+          <Link
+            href={`cycle_times/${record.id}`}
+            key={record.id}
+            className="surface_container cursor-pointer"
+          >
             <div className="flex flex-row gap-4">
               <h1>{record.layout.line_name}</h1>
               <h2>{record.layout.factory_name}</h2>
@@ -36,7 +39,7 @@ const ViewLineBalance = async ({ token }: Props) => {
                 <h2>{record.week}</h2>
               </div>
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>

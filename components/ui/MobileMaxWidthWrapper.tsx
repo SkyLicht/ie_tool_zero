@@ -11,7 +11,7 @@ const MaxMobileWidthWrapper = ({
   return (
     <section
       className={cn(
-        "mx-auto w-full max-w-screen-sm border-2 border-white h-screen  max-h-screen min-h-screen",
+        "mx-auto w-full max-w-screen-sm border h-screen  max-h-screen min-h-screen",
         className,
       )}
     >

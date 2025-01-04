@@ -86,3 +86,48 @@ export const getLineBalancesByWeek = async (
 
   return data;
 };
+
+export const getLineBalanceById = async (
+  token: string,
+  id: string,
+): Promise<LineBalances | null> => {
+  "use server";
+
+  const url = LineManagerRequest().SERVER.GET_LINE_BALANCE_BY_ID(id);
+
+  const response = await fetch(url, {
+    headers: { Authorization: `Bearer ${token}` },
+  }).catch((error) => {
+    throw new ServerUnreachableError("An unexpected error occurred", error);
+  });
+
+  if (!response.ok) {
+    throw new ServerUnreachableError("An unexpected error occurred");
+  }
+
+  if (response.status === 401) {
+    throw new HTTP_401_Error("You are not logged in!");
+  }
+
+  if (response.status === 404) {
+    throw new HTTP_404_Error(`Not Found: ${response.statusText}   ${url}`);
+  }
+
+  if (response.status === 422) {
+    throw new Error("Unprocessable Entity");
+  }
+
+  if (response.status !== 200) {
+    throw new Error("Error fetching line balances");
+  }
+
+  const data = await response.json();
+
+  if (!data) {
+    return null;
+  }
+
+  console.log(data as LineBalances);
+
+  return data;
+};

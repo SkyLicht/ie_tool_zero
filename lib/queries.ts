@@ -1,4 +1,4 @@
-const api = "http://192.168.0.168:3003";
+const api = "http://10.13.33.107:3004";
 
 export const GET_ALL_WORKDAYS_BY_DATE = (str_date: string) => {
   return `${process.env.FASTAPI_URL}/api/v1/planner/get_by_str_date?str_date=${str_date}`;
@@ -32,6 +32,9 @@ export const LineManagerRequest = () => {
     SERVER: {
       GET_LINE_BALANCES_BY_WEEK: (str_date: string) => {
         return `${process.env.FASTAPI_URL}/api/v1/line_balance/get_all_by_week?str_date=${str_date}`;
+      },
+      GET_LINE_BALANCE_BY_ID: (id: string) => {
+        return `${process.env.FASTAPI_URL}/api/v1/line_balance/get_by_id?line_balance_id=${id}`;
       },
       CREATE_LINE_BALANCE: (str_date: string, line_id: string) => {
         return `${process.env.FASTAPI_URL}/api/v1/line_balance/create?str_date=${str_date}&line_id=${line_id}`;

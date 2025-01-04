@@ -203,9 +203,9 @@ const StationsContainer = ({
       </div>
       <div className="w-[600px]  h-fit flex flex-col overflow-y-auto blue-scroll  pr-2 container">
         <ul className="h-fit w-full  flex-vertical gap-2  ">
-          {stations.map((station) => (
+          {stations.map((station, index) => (
             <li
-              key={`station-${station.operation.id}`}
+              key={`station-${station.operation.id}-${index}`}
               className="w-full flex flex-row justify-between gap-2 bg-licht_secondary p-2 rounded-md select-none "
             >
               <div className="flex flex-row gap-4 items-center ">
@@ -333,9 +333,9 @@ const DropDownList = ({
             aria-orientation="vertical"
             aria-labelledby="options-menu"
           >
-            {items.map((item) => (
+            {items.map((item, index) => (
               <button
-                key={item.id}
+                key={`area-${item.id}-${index}`}
                 onClick={() => {
                   onSelect(item.id);
                   setSelectedItem(item);
@@ -368,9 +368,9 @@ const OperationsContainer = ({
       </div>
       <div className="w-[400px]  flex  overflow-y-auto blue-scroll ">
         <ul className="h-fit w-full flex-vertical gap-2 pr-2  ">
-          {operations.map((operation) => (
+          {operations.map((operation, index) => (
             <li
-              key={`operation-${operation.id}`}
+              key={`operation-${operation.id}-${index}`}
               className="group bg-licht_secondary w-full flex flex-row gap-4 p-2 rounded-md select-none cursor-pointer hover:bg-licht_on_surface active:bg-transparent"
               onClick={() => onOperationClick(operation)}
             >
