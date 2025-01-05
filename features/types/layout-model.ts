@@ -10,3 +10,11 @@ export type LayoutModel = {
 
   stations: StationsModel[];
 };
+
+export type LayoutModelShort = {
+  id: string;
+  line_id: string;
+  line_name: string;
+  factory_id: string;
+  factory: string;
+};

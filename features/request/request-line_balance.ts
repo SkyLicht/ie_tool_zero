@@ -2,8 +2,14 @@ import { LineManagerRequest } from "@/lib/queries";
 import {
   HTTP_401_Error,
   HTTP_404_Error,
+  responseHandler,
   ServerUnreachableError,
 } from "@/lib/licht-request";
+import {
+  LineBalanceQuery,
+  RecordQuery,
+  TakeModel,
+} from "@/features/types/line-balance";
 
 type LineBalances = {
   id: string;
@@ -90,44 +96,61 @@ export const getLineBalancesByWeek = async (
 export const getLineBalanceById = async (
   token: string,
   id: string,
-): Promise<LineBalances | null> => {
+): Promise<LineBalanceQuery | null> => {
   "use server";
 
   const url = LineManagerRequest().SERVER.GET_LINE_BALANCE_BY_ID(id);
 
   const response = await fetch(url, {
     headers: { Authorization: `Bearer ${token}` },
+    next: { tags: ["line-balance-by-id"] },
+    cache: "force-cache",
   }).catch((error) => {
     throw new ServerUnreachableError("An unexpected error occurred", error);
   });
 
-  if (!response.ok) {
-    throw new ServerUnreachableError("An unexpected error occurred");
-  }
+  const data = await responseHandler(response, url);
 
-  if (response.status === 401) {
-    throw new HTTP_401_Error("You are not logged in!");
-  }
+  return data || null;
+};
 
-  if (response.status === 404) {
-    throw new HTTP_404_Error(`Not Found: ${response.statusText}   ${url}`);
-  }
+export const getTakesByLineBalanceId = async (
+  token: string,
+  id: string,
+): Promise<TakeModel[] | null> => {
+  "use server";
+  const url = LineManagerRequest().SERVER.GET_TAKES_BY_LINE_BALANCE_ID(id);
 
-  if (response.status === 422) {
-    throw new Error("Unprocessable Entity");
-  }
+  const response = await fetch(url, {
+    headers: { Authorization: `Bearer ${token}` },
+    next: { tags: ["takes"] },
+    cache: "force-cache",
+  }).catch((error) => {
+    throw new ServerUnreachableError("An unexpected error occurred", error);
+  });
 
-  if (response.status !== 200) {
-    throw new Error("Error fetching line balances");
-  }
+  const data = await responseHandler(response, url);
+  // `responseHandler` returned the parsed JSON object directly
 
-  const data = await response.json();
+  return data || null;
+};
 
-  if (!data) {
-    return null;
-  }
+export const getCycleTimesByTakeId = async (
+  token: string,
+  id: string,
+): Promise<RecordQuery[] | null> => {
+  "use server";
+  const url = LineManagerRequest().SERVER.GET_CYCLE_TIMES_BY_TASK_ID(id);
 
-  console.log(data as LineBalances);
+  const response = await fetch(url, {
+    headers: { Authorization: `Bearer ${token}` },
+    next: { tags: ["cycle-times"] },
+  }).catch((error) => {
+    throw new ServerUnreachableError("An unexpected error occurred", error);
+  });
 
-  return data;
+  const data = await responseHandler(response, url);
+  // `responseHandler` returned the parsed JSON object directly
+
+  return data || null;
 };

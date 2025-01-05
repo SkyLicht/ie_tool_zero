@@ -25,7 +25,11 @@ export const customPackagedError = [
   ServerUnreachableError,
 ];
 
-export function catchErrorTyped<T, E extends new (message?: string) => Error>(
+// todo: add type to dataParser and check if async is needed
+export async function catchErrorTyped<
+  T,
+  E extends new (message?: string) => Error,
+>(
   promise: Promise<T>,
   errorToCatch?: E[],
   dataParser?: (data: T) => void,
@@ -46,7 +50,30 @@ export function catchErrorTyped<T, E extends new (message?: string) => Error>(
         return [error];
       }
 
-      console.log("error", error);
       throw error;
     });
+}
+
+export async function responseHandler(response: Response, url: string) {
+  // 1) Handle specific status codes first
+  if (response.status === 401) {
+    throw new HTTP_401_Error("You are not logged in!");
+  }
+
+  if (response.status === 404) {
+    throw new HTTP_404_Error(`Not Found: ${response.statusText}   ${url}`);
+  }
+
+  if (response.status === 422) {
+    throw new Error("Unprocessable Entity");
+  }
+
+  // 2) If the response is NOT in the range 200-299,
+  //    handle it as an unexpected error
+  if (!response.ok) {
+    throw new ServerUnreachableError("An unexpected error occurred");
+  }
+
+  // 3) If everything is okay, parse the JSON and return
+  return response.json();
 }
