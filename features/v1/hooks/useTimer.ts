@@ -19,6 +19,10 @@ export function useTimer(startTime: number = 0) {
     };
   }, [isRunning, isPaused]);
 
+  useEffect(() => {
+    setTime(startTime);
+  }, [startTime]);
+
   const start = useCallback(() => {
     setIsRunning(true);
     setIsPaused(false);

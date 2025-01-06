@@ -33,7 +33,7 @@ const ViewCycleTimes = async ({ selected_take, token }: Props) => {
   }
 
   return (
-    <div className="border-white border-2  overflow-y-auto scroll-blue ">
+    <div className="overflow-y-auto scroll-blue pr-2">
       <h3>Cycle Times</h3>
       <ul className="flex flex-col gap-2">
         {line_balance.map((cycle_time) => (
