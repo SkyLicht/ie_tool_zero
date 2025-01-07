@@ -18,11 +18,17 @@ export class ServerUnreachableError extends Error {
   extraProp = "ERROR: test";
 }
 
+export class LoggedInError extends Error {
+  name = "Logged In Error";
+  extraProp = "ERROR: test";
+}
+
 export const customPackagedError = [
   CustomError,
   HTTP_401_Error,
   HTTP_404_Error,
   ServerUnreachableError,
+  LoggedInError,
 ];
 
 // todo: add type to dataParser and check if async is needed

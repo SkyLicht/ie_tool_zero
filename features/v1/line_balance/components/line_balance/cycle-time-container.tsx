@@ -1,7 +1,7 @@
 "use client";
 import React, { useMemo, useState } from "react";
 import { RecordQuery } from "@/features/types/line-balance";
-import { CycleTimeTimer } from "@/features/v1/line_balance/components/form/add-cycle-time";
+import { CycleTimeTimer } from "@/features/v1/line_balance/components/form/timer";
 import { PlusIcon } from "lucide-react";
 
 type Props = {
@@ -52,7 +52,7 @@ const CycleTimeContainer = ({ record }: Props) => {
           {cycleTime.map((cycle_time, index) => (
             <div
               key={`cycle-time-${record.id}-${index}`}
-              className="h-[40px] w-[75px] min-w-[75px] flex  items-center justify-center font-semibold text-xl rounded-md bg-blue-800"
+              className="h-[40px] w-[75px] min-w-[75px] flex cursor-pointer items-center justify-center font-semibold text-xl rounded-md card-container"
               onClick={() => {
                 setSelectedIndex(index);
                 setOpen(true);

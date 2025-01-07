@@ -55,8 +55,13 @@ export type TakeQuery = {
   updated_at: string;
 };
 
+export type TakeQueryShort = {
+  id: string;
+};
+
 export type TakeModel = {
   id: string;
+  index: number;
   user_id: string;
   user_name: string;
   created_at: string;
@@ -69,4 +74,12 @@ export type LineBalanceQuery = {
   week: number;
   layout: LayoutModelShort;
   takes: TakeQuery[];
+};
+
+export type LineBalanceShirtQuery = {
+  id: string;
+  str_date: string;
+  week: number;
+  layout: LayoutModelShort;
+  takes: TakeQueryShort[];
 };

@@ -23,11 +23,7 @@ export const GET_ALL_WORK_PLANS_BY_WORK_DAY_ID = (
 };
 export const GET_ALL_LINES = `${process.env.FASTAPI_URL}/api/v1/layout/get_lines`;
 
-export const GET_STATIONS_BY_LAYOUT_ID = (id: string) => {
-  return `${process.env.FASTAPI_URL}/api/v1/layout/get_stations_by_layout_id?layout_id=${id}`;
-};
-
-export const LineManagerRequest = () => {
+export const LineBalanceRequestQuery = () => {
   return {
     SERVER: {
       GET_LINE_BALANCES_BY_WEEK: (str_date: string) => {
@@ -48,10 +44,25 @@ export const LineManagerRequest = () => {
       CREATE_TASK: (line_balance_id: string) => {
         return `${process.env.FASTAPI_URL}/api/v1/line_balance/create_task?line_balance_id=${line_balance_id}`;
       },
+      CREATE_TASK_WITH_STATIONS: `${process.env.FASTAPI_URL}/api/v1/line_balance/create_task`,
+      DELETE_TAKE: (task_id: string) => {
+        return `${process.env.FASTAPI_URL}/api/v1/line_balance/delete_take?take_id=${task_id}`;
+      },
     },
   };
 };
-
+export const StationsRequestQuery = () => {
+  return {
+    SERVER: {
+      GET_STATIONS_BY_LAYOUT_ID: (layout_id: string) => {
+        return `${process.env.FASTAPI_URL}/api/v1/layout/get_stations_by_layout_id?layout_id=${layout_id}`;
+      },
+      GET_STATIONS_BY_LINE_BALANCE_ID: (line_balance_id: string) => {
+        return `${process.env.FASTAPI_URL}/api/v1/line_balance/get_stations_by_line_balance?line_balance_id=${line_balance_id}`;
+      },
+    },
+  };
+};
 export const GET_ALL_LAYOUTS = `${process.env.FASTAPI_URL}/api/v1/layout/get_layouts`;
 // client
 

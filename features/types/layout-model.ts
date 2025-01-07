@@ -16,5 +16,5 @@ export type LayoutModelShort = {
   line_id: string;
   line_name: string;
   factory_id: string;
-  factory: string;
+  factory_name: string;
 };

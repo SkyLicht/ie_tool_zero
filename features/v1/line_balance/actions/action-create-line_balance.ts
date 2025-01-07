@@ -1,7 +1,7 @@
 "use server";
 import { auth } from "@/auth";
 import { parseServerActionResponse } from "@/lib/utils";
-import { LineManagerRequest } from "@/lib/queries";
+import { LineBalanceRequestQuery } from "@/lib/queries";
 import { getCurrentLocalDate } from "@/lib/date-utils";
 
 export const createLineBalance = async (
@@ -22,7 +22,7 @@ export const createLineBalance = async (
     // Create Line Balance
 
     const response = await fetch(
-      LineManagerRequest().SERVER.CREATE_LINE_BALANCE(
+      LineBalanceRequestQuery().SERVER.CREATE_LINE_BALANCE(
         str_date || getCurrentLocalDate(),
         line_id,
       ),

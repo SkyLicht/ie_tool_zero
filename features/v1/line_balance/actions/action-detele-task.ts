@@ -3,12 +3,12 @@ import { auth } from "@/auth";
 import { LineBalanceRequestQuery } from "@/lib/queries";
 import { parseServerActionResponse } from "@/lib/utils";
 import { revalidateTag } from "next/cache";
+import { serverActionResponse } from "@/lib/licht-actions";
 
-export const createTake = async (
+export const deleteTake = async <T>(
   state: any,
-  line_balance_id: string,
-  stations_id: string[],
-) => {
+  take_id: string,
+): Promise<serverActionResponse<T>> => {
   const session = await auth();
   if (!session) {
     return {
@@ -19,22 +19,14 @@ export const createTake = async (
 
   try {
     const response = await fetch(
-      LineBalanceRequestQuery().SERVER.CREATE_TASK_WITH_STATIONS,
+      LineBalanceRequestQuery().SERVER.DELETE_TAKE(take_id),
       {
-        method: "POST",
+        method: "DELETE",
         headers: {
           Authorization: `Bearer ${session.user.token}`,
-          "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          line_balance_id: line_balance_id,
-          stations_id: stations_id,
-        }),
       },
-    ).catch((error) => {
-      throw new Error("Server Unreachable Error", error);
-    });
-
+    );
     if (!response.ok) {
       return parseServerActionResponse({
         error: response.statusText,
@@ -56,9 +48,10 @@ export const createTake = async (
       data: await response.json(),
       status: "SUCCESS",
     });
-  } catch {
+  } catch (error: any) {
+    console.log(error);
     return {
-      error: "An unexpected error occurred",
+      error: error.message,
       status: "ERROR",
     };
   }

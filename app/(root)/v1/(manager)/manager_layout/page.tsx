@@ -3,7 +3,7 @@ import React from "react";
 import LayoutsContainer from "@/features/v1/manager/components/manager_layout/layouts-container";
 import { auth } from "@/auth";
 import { catchErrorTyped, customPackagedError } from "@/lib/licht-request";
-import { getLinesGroupedByFactoryV2 } from "@/features/request/line-request";
+import { getLinesGroupedByFactoryV2 } from "@/features/request/request-line";
 
 const ManageLayoutPage = async () => {
   const session = await auth();
