@@ -7,14 +7,22 @@ import {
 } from "@/features/types/line-balance";
 import { LineBalanceRequestQuery } from "@/lib/queries";
 
-export const getLineBalancesByWeek = async (
-  token: string,
-  str_date: string,
-): Promise<LineBalanceShirtQuery[]> => {
+export const getLineBalancesByWeek = async ({
+  token,
+  str_date,
+  week,
+}: {
+  token: string;
+  str_date?: string;
+  week?: number;
+}): Promise<LineBalanceShirtQuery[]> => {
   "use server";
 
-  const url =
-    LineBalanceRequestQuery().SERVER.GET_LINE_BALANCES_BY_WEEK(str_date);
+  const url = week
+    ? LineBalanceRequestQuery().SERVER.GET_LINE_BALANCES_BY_WEEK_2(week)
+    : LineBalanceRequestQuery().SERVER.GET_LINE_BALANCES_BY_WEEK(
+        str_date || "",
+      );
 
   const response = await fetch(url, {
     headers: { Authorization: `Bearer ${token}` },
@@ -38,7 +46,7 @@ export const getLineBalanceById = async (
   const response = await fetch(url, {
     headers: { Authorization: `Bearer ${token}` },
     next: { tags: ["line-balance-by-id"] },
-    cache: "force-cache",
+    // cache: "force-cache",
   }).catch((error) => {
     throw new ServerUnreachableError("An unexpected error occurred", error);
   });

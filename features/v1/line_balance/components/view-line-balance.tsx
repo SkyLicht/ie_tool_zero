@@ -11,10 +11,10 @@ type Props = {
 };
 const ViewLineBalance = async ({ token }: Props) => {
   const [error, data] = await catchErrorTyped(
-    getLineBalancesByWeek(
-      token,
-      format(new Date().toLocaleDateString(), "yyyy-MM-dd"),
-    ),
+    getLineBalancesByWeek({
+      token: token,
+      str_date: format(new Date().toLocaleDateString(), "yyyy-MM-dd"),
+    }),
     [...customPackagedError, Error],
   );
 

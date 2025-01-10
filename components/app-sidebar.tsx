@@ -86,7 +86,7 @@ export const AppSidebar = async () => {
   // } = useSidebar();
 
   return (
-    <Sidebar variant="sidebar" collapsible="icon">
+    <Sidebar variant="floating" collapsible="icon">
       <SidebarHeader>
         <SidebarTrigger />
       </SidebarHeader>

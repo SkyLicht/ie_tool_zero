@@ -1,7 +1,7 @@
 import { LayoutModelShort } from "@/features/types/layout-model";
 import { AreaModel } from "@/features/types/area-model";
 
-type WorkPlanQuery = {
+export type WorkPlanQuery = {
   id: string;
   str_date: string;
   week: number;
@@ -16,6 +16,11 @@ type WorkPlanQuery = {
     width: number;
     sku: string;
     in_service: boolean;
+  };
+  line: {
+    id: string;
+    name: string;
+    factory: string;
   };
   planned_hours: number;
   target_oee: number;
@@ -42,7 +47,8 @@ type StationQuery = {
 export type RecordQuery = {
   id: string;
   station_id: string;
-  cycle_time: [];
+  cycle_times: [];
+  ct: number;
   area: AreaModel;
   station: StationQuery;
 };
@@ -74,6 +80,9 @@ export type LineBalanceQuery = {
   week: number;
   layout: LayoutModelShort;
   takes: TakeQuery[];
+  refactored_records: RefactorRecordsQuery[];
+  smt_bottleneck: RefactorRecordsQuery;
+  packing_bottleneck: RefactorRecordsQuery;
 };
 
 export type LineBalanceShirtQuery = {
@@ -82,4 +91,26 @@ export type LineBalanceShirtQuery = {
   week: number;
   layout: LayoutModelShort;
   takes: TakeQueryShort[];
+};
+
+export type RefactorRecordsQuery = {
+  id: string;
+  index: number;
+  has_updated: boolean;
+  base_ct: number;
+  all_ct: number[];
+  last_ct: number;
+  station_id: string;
+  area: {
+    id: string;
+    index: number;
+    name: string;
+    section: string;
+  };
+  station: {
+    id: string;
+    operation_id: string;
+    operation_name: string;
+    is_automatic: boolean;
+  };
 };

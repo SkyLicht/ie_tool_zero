@@ -1,4 +1,4 @@
-const api = "http://192.168.0.168:3003";
+const api = "http://10.13.33.98:3004";
 
 export const GET_ALL_WORKDAYS_BY_DATE = (str_date: string) => {
   return `${process.env.FASTAPI_URL}/api/v1/planner/get_by_str_date?str_date=${str_date}`;
@@ -29,6 +29,9 @@ export const LineBalanceRequestQuery = () => {
       GET_LINE_BALANCES_BY_WEEK: (str_date: string) => {
         return `${process.env.FASTAPI_URL}/api/v1/line_balance/get_all_by_week?str_date=${str_date}`;
       },
+      GET_LINE_BALANCES_BY_WEEK_2: (week: number) => {
+        return `${process.env.FASTAPI_URL}/api/v1/line_balance/get_line_balances_by_week?week=${week}`;
+      },
       GET_LINE_BALANCE_BY_ID: (id: string) => {
         return `${process.env.FASTAPI_URL}/api/v1/line_balance/get_by_id?line_balance_id=${id}`;
       },
@@ -41,13 +44,11 @@ export const LineBalanceRequestQuery = () => {
       CREATE_LINE_BALANCE: (str_date: string, line_id: string) => {
         return `${process.env.FASTAPI_URL}/api/v1/line_balance/create?str_date=${str_date}&line_id=${line_id}`;
       },
-      CREATE_TASK: (line_balance_id: string) => {
-        return `${process.env.FASTAPI_URL}/api/v1/line_balance/create_task?line_balance_id=${line_balance_id}`;
-      },
       CREATE_TASK_WITH_STATIONS: `${process.env.FASTAPI_URL}/api/v1/line_balance/create_task`,
       DELETE_TAKE: (task_id: string) => {
         return `${process.env.FASTAPI_URL}/api/v1/line_balance/delete_take?take_id=${task_id}`;
       },
+      UPDATE_RECORD: `${process.env.FASTAPI_URL}/api/v1/line_balance/update_record_by_id`,
     },
   };
 };

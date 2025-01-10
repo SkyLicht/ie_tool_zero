@@ -109,7 +109,7 @@ const LayoutContainer = ({ layout_id, areas, operations, layout }: Props) => {
       toast.error("Some stations are missing area");
       return;
     }
-
+    console.log(UPDATE_LAYOUT);
     try {
       const session = await getSession();
       if (!session?.user.token) {

@@ -125,7 +125,9 @@ body {
 }
 
 @layer utilities {
-
+    .content_full {
+        @apply w-full h-full
+    }
 
     .flex_center {
         @apply flex justify-center items-center;
@@ -133,6 +135,17 @@ body {
 
     .flex-between {
         @apply flex justify-between items-center;
+    }
+
+    .flex-vertical {
+        @apply flex flex-col;
+    }
+
+    .container {
+        @apply bg-licht_surface p-2  shadow-lg border-[#2d2d2d] rounded-lg select-none ;
+    }
+    .container_secondary {
+        @apply bg-licht_secondary p-2  shadow-lg border-[#2d2d2d] rounded-lg select-none ;
     }
 
     /*bg-neutral-600/30 backdrop-brightness-150 backdrop-blur-sm*/
@@ -157,17 +170,11 @@ body {
         @apply text-sm font-roboto font-normal text-neutral-300;
     }
 
-    .container {
-        @apply bg-licht_surface p-2  shadow-lg border-[#2d2d2d] rounded-lg select-none ;
-    }
 
     .surface_container {
         @apply bg-licht_surface p-2   rounded-lg shadow-lg  border-[#2d2d2d];
     }
 
-    .flex-vertical {
-        @apply flex flex-col;
-    }
 
     .btn_props {
         @apply h-8  px-4 rounded-full border-0 text-sm font-medium shadow-lg focus:outline-none focus:ring-0 focus:ring-offset-0 focus:ring-transparent select-none transition-colors duration-300;
@@ -191,6 +198,10 @@ body {
 
     .btn_action {
         @apply bg-licht_interactive text-primary-foreground btn_props;
+    }
+
+    .btn_action-save {
+        @apply flex flex-row gap-2  items-center text-blue-600 bg-licht_interactive btn_props
     }
 
     .btn_action-delete {
@@ -223,8 +234,5 @@ body {
         @apply text-lg font-work_sans font-bold tracking-wider
     }
 
-    .content_full {
-        @apply w-full h-full
-    }
 
 }
