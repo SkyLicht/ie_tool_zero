@@ -12,6 +12,7 @@ const PlannerLayout = ({
       <main className="h-full w-full  flex flex-1 justify-center  p-2 ">
         <section className="h-full w-full flex flex-col gap-4 max-w-screen-xl items-center">
           <div className=" w-full flex flex-row justify-center items-center">
+            lll
             <SidebarTrigger className="relative left-0 bg-amber-200" />
             <DaySelectorContainer />
           </div>
