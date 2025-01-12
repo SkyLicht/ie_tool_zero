@@ -9,6 +9,8 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import {
@@ -21,6 +23,7 @@ import {
   Inbox,
   LogInIcon,
   LogOutIcon,
+  LucideProps,
   TimerIcon,
   User2,
   WorkflowIcon,
@@ -31,6 +34,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { auth, signIn, signOut } from "@/auth";
 import React from "react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 // import Link from "next/link";
 // import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -72,6 +80,59 @@ const items = [
   //   icon: Settings,
   // },
 ];
+type MenuItem = {
+  id: string;
+  title: string;
+  url: string;
+  icon: React.ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+  >;
+};
+
+type Application = {
+  id: string;
+  label: string;
+  menus: MenuItem[];
+};
+
+const APPLICATIONS: Application[] = [
+  {
+    id: "164800f3-677a-45c5-b5c1-b898f71f6be2",
+    label: "Line Balance",
+    menus: [
+      {
+        id: "0a0c60cf-c72a-4a2b-a605-c1cf6b345c40",
+        title: "Line Balance",
+        url: "/v1/cycle_times",
+        icon: TimerIcon,
+      },
+      {
+        id: "c45ce633-48f8-4513-95cf-5d357a409460",
+        title: "Cycle Time",
+        url: "/v1/cycle_times",
+        icon: TimerIcon,
+      },
+    ],
+  },
+  {
+    id: "79b515e6-6da3-4aee-b263-d71667bc8c71",
+    label: "Planner",
+    menus: [
+      {
+        id: "9a64bd78-e79f-4887-91d6-868a6324e4cf",
+        title: "Line Balance",
+        url: "/v1/cycle_times",
+        icon: TimerIcon,
+      },
+      {
+        id: "f17e3040-3bb0-4e46-86a2-287d4e81521f",
+        title: "Cycle Time",
+        url: "/v1/cycle_times",
+        icon: TimerIcon,
+      },
+    ],
+  },
+];
 
 export const AppSidebar = async () => {
   const session = await auth();
@@ -86,28 +147,50 @@ export const AppSidebar = async () => {
   // } = useSidebar();
 
   return (
-    <Sidebar variant="floating" collapsible="icon">
-      <SidebarHeader>
-        <SidebarTrigger />
-      </SidebarHeader>
+    <Sidebar variant="sidebar" collapsible="offcanvas">
+      <SidebarHeader></SidebarHeader>
       <SidebarContent className="overflow-x-hidden">
-        <SidebarGroup />
         <SidebarGroupLabel>Application</SidebarGroupLabel>
         <SidebarGroupContent>
-          <SidebarMenu>
-            {items.map((item) => (
-              <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild>
-                  <a href={item.url}>
-                    <item.icon />
-                    <span>{item.title}</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
+          {/*<SidebarMenu>*/}
+          {/*  {items.map((item) => (*/}
+          {/*    <SidebarMenuItem key={item.title}>*/}
+          {/*      <SidebarMenuButton asChild>*/}
+          {/*        <a href={item.url}>*/}
+          {/*          <item.icon />*/}
+          {/*          <span>{item.title}</span>*/}
+          {/*        </a>*/}
+          {/*      </SidebarMenuButton>*/}
+          {/*    </SidebarMenuItem>*/}
+          {/*  ))}*/}
+          {/*</SidebarMenu>*/}
+
+          {APPLICATIONS.map((item, index) => (
+            <SidebarMenu key={item.id}>
+              <Collapsible defaultOpen className="group/collapsible">
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton> {item.label} </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      {item.menus.map((menu) => (
+                        <SidebarMenuItem key={menu.title}>
+                          <SidebarMenuButton asChild>
+                            <a href={menu.url}>
+                              <menu.icon />
+                              <span>{menu.title}</span>
+                            </a>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                      ))}
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </SidebarMenuItem>
+              </Collapsible>
+            </SidebarMenu>
+          ))}
         </SidebarGroupContent>
-        <SidebarGroup />
       </SidebarContent>
       <SidebarFooter>
         {session && session?.user ? (
