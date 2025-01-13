@@ -31,7 +31,7 @@ const WeekSelector = ({ year, week, onWeekChange }: Props) => {
           className="w-[80px] flex flex-row justify-between items-center btn_primary "
         >
           <CalendarIcon />
-          <span className=" text-lg">{value}</span>
+          <span className=" text-lg">{value == 0 ? "-" : value}</span>
         </button>
       </PopoverTrigger>
       <PopoverContent

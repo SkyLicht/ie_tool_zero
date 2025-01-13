@@ -49,7 +49,10 @@ const CycleTimeContainer = ({ record }: Props) => {
           setCanSave(true);
         }}
         setOpen={setOpen}
-        onRemove={handleOnRemoveCycleByIndex}
+        onRemove={() => {
+          handleOnRemoveCycleByIndex();
+          setCanSave(true);
+        }}
         selectedIndex={selectedIndex}
       />
       <div className="h-[35px]  flex items-center justify-between">

@@ -1,20 +1,26 @@
 import React from "react";
 
-import { auth } from "@/auth";
-import { redirect } from "next/navigation";
-
 import { getWorkDaysByDate } from "@/features/request/work-day";
 import { catchErrorTyped, customPackagedError } from "@/lib/licht-request";
 import WorkDaysContainer from "@/features/v1/planner/components/WorkDaysContainer";
+import { getServerSideProps } from "@/lib/service-side";
+import { getPlatformsInService } from "@/features/request/request-platform";
 
 const WorkDayPage = async ({
   params,
+  searchParams,
 }: {
   params: Promise<{ workday: string }>;
+  searchParams: Promise<{ selected_day: string }>;
 }) => {
   const workday = (await params).workday;
-  const session = await auth();
-  if (!session) redirect("/");
+  const selected_day = (await searchParams).selected_day;
+  const session = await getServerSideProps();
+
+  const [error_platform, platforms] = await catchErrorTyped(
+    getPlatformsInService(session.user.token),
+    [...customPackagedError, Error],
+  );
 
   const [error, work_days] = await catchErrorTyped(
     getWorkDaysByDate(session.user.token, workday),
@@ -29,7 +35,11 @@ const WorkDayPage = async ({
 
   return (
     <div className="w-full h-full overflow-y-auto overflow-x-auto scroll-blue ">
-      <WorkDaysContainer data={work_days || []} />
+      {selected_day ? (
+        <WorkDaysContainer data={work_days || []} platforms={platforms || []} />
+      ) : (
+        <div>Select a day</div>
+      )}
     </div>
   );
 };

@@ -1,11 +1,11 @@
 "use server";
 import React from "react";
-import { auth } from "@/auth";
 import { GET_ALL_OPERATIONS_AREAS, GET_LAYOUT_BY_ID } from "@/lib/queries";
 import { AreaModel } from "@/features/types/area-model";
 import LayoutContainer from "@/features/v1/manager/components/manager_layout/layout-container";
 import { OperationModel } from "@/features/types/operation-model";
 import { LayoutModel } from "@/features/types/layout-model";
+import { getServerSideProps } from "@/lib/service-side";
 
 const ManageLayoutPage = async ({
   params,
@@ -14,11 +14,7 @@ const ManageLayoutPage = async ({
 }) => {
   const { layout_id } = await params;
 
-  const session = await auth();
-
-  if (!session) {
-    return <p className={"font-bold"}>You are not logged in!</p>;
-  }
+  const session = await getServerSideProps();
 
   const response_operations = await fetch(GET_ALL_OPERATIONS_AREAS, {
     headers: { Authorization: `Bearer ${session?.user.token}` },

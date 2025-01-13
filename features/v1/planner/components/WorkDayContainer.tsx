@@ -1,8 +1,14 @@
 import WorkPlansContainer from "@/features/v1/planner/components/WorkPlansContainer";
 import WorkDayAddWorkPlan from "@/features/v1/planner/components/forms/WorkDayAddWorkPlan";
 import { WorkDayModel } from "@/features/types/work-day";
-
-const WorkDayContainer = ({ record }: { record: WorkDayModel }) => {
+import { Platform } from "@/features/types/platform";
+const WorkDayContainer = ({
+  record,
+  platforms,
+}: {
+  record: WorkDayModel;
+  platforms: Platform[];
+}) => {
   return (
     <li
       className={
@@ -19,6 +25,7 @@ const WorkDayContainer = ({ record }: { record: WorkDayModel }) => {
           work_day_id={record.id}
           str_date={record.str_date}
           line_id={record.line.id}
+          platforms={platforms}
         />
         <div className="h-fit  flex justify-center ">
           <WorkPlansContainer

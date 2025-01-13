@@ -3,6 +3,7 @@ import React from "react";
 import { auth } from "@/auth";
 import ViewTakes from "@/features/v1/line_balance/components/line_balance/view-takes";
 import ViewCycleTimes from "@/features/v1/line_balance/components/line_balance/view-cycle-times";
+import { getServerSideProps } from "@/lib/service-side";
 
 const CycleTimePage = async ({
   params,
@@ -15,10 +16,7 @@ const CycleTimePage = async ({
   const selected_take = (await searchParams).selected_take;
   const index = (await searchParams).index;
 
-  const session = await auth();
-  if (!session) {
-    return <p className={"font-bold"}>You are not logged in!</p>;
-  }
+  const session = await getServerSideProps();
 
   return (
     <div className="content_full flex flex-col gap-2 ">

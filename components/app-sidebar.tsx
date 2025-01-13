@@ -18,15 +18,14 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import {
+  ChevronDownIcon,
   ChevronUp,
-  Home,
-  Inbox,
   LogInIcon,
   LogOutIcon,
   LucideProps,
+  NotepadTextIcon,
   TimerIcon,
   User2,
-  WorkflowIcon,
 } from "lucide-react";
 import {
   DropdownMenuContent,
@@ -42,56 +41,18 @@ import {
 // import Link from "next/link";
 // import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-// Menu items.
-const items = [
-  {
-    title: "Home",
-    url: "/",
-    icon: Home,
-  },
-  {
-    title: "Manager",
-    url: "/v1/manager_layout",
-    icon: Inbox,
-  },
-  {
-    title: "Line Balance",
-    url: "/v1/cycle_times",
-    icon: TimerIcon,
-  },
-  {
-    title: "Planner",
-    url: "/v1/workdays",
-    icon: WorkflowIcon,
-  },
-  // {
-  //   title: "Calendar",
-  //   url: "#",
-  //   icon: Calendar,
-  // },
-  // {
-  //   title: "Search",
-  //   url: "#",
-  //   icon: Search,
-  // },
-  // {
-  //   title: "Settings",
-  //   url: "#",
-  //   icon: Settings,
-  // },
-];
 type MenuItem = {
   id: string;
   title: string;
   url: string;
-  icon: React.ForwardRefExoticComponent<
-    Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
-  >;
 };
 
 type Application = {
   id: string;
   label: string;
+  icon: React.ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+  >;
   menus: MenuItem[];
 };
 
@@ -99,36 +60,29 @@ const APPLICATIONS: Application[] = [
   {
     id: "164800f3-677a-45c5-b5c1-b898f71f6be2",
     label: "Line Balance",
+    icon: TimerIcon,
     menus: [
       {
         id: "0a0c60cf-c72a-4a2b-a605-c1cf6b345c40",
-        title: "Line Balance",
+        title: "Cycle Time",
         url: "/v1/cycle_times",
-        icon: TimerIcon,
       },
       {
         id: "c45ce633-48f8-4513-95cf-5d357a409460",
-        title: "Cycle Time",
-        url: "/v1/cycle_times",
-        icon: TimerIcon,
+        title: "Dashboard",
+        url: "/v1/line_balances",
       },
     ],
   },
   {
     id: "79b515e6-6da3-4aee-b263-d71667bc8c71",
     label: "Planner",
+    icon: NotepadTextIcon,
     menus: [
       {
         id: "9a64bd78-e79f-4887-91d6-868a6324e4cf",
-        title: "Line Balance",
-        url: "/v1/cycle_times",
-        icon: TimerIcon,
-      },
-      {
-        id: "f17e3040-3bb0-4e46-86a2-287d4e81521f",
-        title: "Cycle Time",
-        url: "/v1/cycle_times",
-        icon: TimerIcon,
+        title: "Work Plan",
+        url: "/v1/workdays",
       },
     ],
   },
@@ -147,30 +101,23 @@ export const AppSidebar = async () => {
   // } = useSidebar();
 
   return (
-    <Sidebar variant="sidebar" collapsible="offcanvas">
-      <SidebarHeader></SidebarHeader>
-      <SidebarContent className="overflow-x-hidden">
+    <Sidebar variant="floating" collapsible="icon">
+      <SidebarHeader>
+        <SidebarTrigger />
+      </SidebarHeader>
+      <SidebarContent className="overflow-x-hidden ">
         <SidebarGroupLabel>Application</SidebarGroupLabel>
         <SidebarGroupContent>
-          {/*<SidebarMenu>*/}
-          {/*  {items.map((item) => (*/}
-          {/*    <SidebarMenuItem key={item.title}>*/}
-          {/*      <SidebarMenuButton asChild>*/}
-          {/*        <a href={item.url}>*/}
-          {/*          <item.icon />*/}
-          {/*          <span>{item.title}</span>*/}
-          {/*        </a>*/}
-          {/*      </SidebarMenuButton>*/}
-          {/*    </SidebarMenuItem>*/}
-          {/*  ))}*/}
-          {/*</SidebarMenu>*/}
-
           {APPLICATIONS.map((item, index) => (
             <SidebarMenu key={item.id}>
-              <Collapsible defaultOpen className="group/collapsible">
+              <Collapsible defaultOpen className="group/collapsible ">
                 <SidebarMenuItem>
                   <CollapsibleTrigger asChild>
-                    <SidebarMenuButton> {item.label} </SidebarMenuButton>
+                    <SidebarMenuButton className="font-semibold text-neutra-20">
+                      <item.icon />
+                      <span>{item.label}</span>
+                      <ChevronDownIcon />
+                    </SidebarMenuButton>
                   </CollapsibleTrigger>
                   <CollapsibleContent>
                     <SidebarMenuSub>
@@ -178,7 +125,6 @@ export const AppSidebar = async () => {
                         <SidebarMenuItem key={menu.title}>
                           <SidebarMenuButton asChild>
                             <a href={menu.url}>
-                              <menu.icon />
                               <span>{menu.title}</span>
                             </a>
                           </SidebarMenuButton>

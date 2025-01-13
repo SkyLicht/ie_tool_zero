@@ -6,6 +6,7 @@ import { getLineBalanceById } from "@/features/request/request-line_balance";
 import ChartLineBalanceContainer from "@/features/v1/line_balance/components/line_balance_statics/chart-line-balance-container";
 import LineBalanceStaticsInfo from "@/features/v1/line_balance/components/line_balance_statics/line-balance-statics-info";
 import LineBalanceStaticsBottlenecks from "@/features/v1/line_balance/components/line_balance_statics/line-balance-statics-bottlenecks";
+import { getServerSideProps } from "@/lib/service-side";
 
 const LineBalancePage = async ({
   params,
@@ -15,10 +16,7 @@ const LineBalancePage = async ({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) => {
   const { line_balance_id } = await params;
-  const session = await auth();
-  if (!session) {
-    return <p>user </p>;
-  }
+  const session = await getServerSideProps();
 
   const [error, line_balance] = await catchErrorTyped(
     getLineBalanceById(session.user.token, line_balance_id),

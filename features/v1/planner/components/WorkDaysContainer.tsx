@@ -2,11 +2,13 @@
 
 import WorkDayContainer from "@/features/v1/planner/components/WorkDayContainer";
 import { WorkDayModel } from "@/features/types/work-day";
+import { Platform } from "@/features/types/platform";
 
 type Props = {
   data: WorkDayModel[];
+  platforms: Platform[];
 };
-const WorkDaysContainer = ({ data }: Props) => {
+const WorkDaysContainer = ({ data, platforms }: Props) => {
   return (
     <section className="content_full  flex flex-1 justify-center">
       <ul
@@ -15,11 +17,10 @@ const WorkDaysContainer = ({ data }: Props) => {
         }
       >
         {data.map((record, index) => (
-          <WorkDayContainer key={index} record={record} />
+          <WorkDayContainer key={index} record={record} platforms={platforms} />
         ))}
       </ul>
     </section>
   );
 };
-
 export default WorkDaysContainer;

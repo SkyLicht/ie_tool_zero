@@ -4,25 +4,27 @@ import { Input } from "@/components/ui/input";
 import { workPlanSchema } from "@/features/v1/planner/lib/planner-validation";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { useFetchPlatforms } from "@/features/v1/hooks/useFetchPlatforms";
 import { cn } from "@/lib/utils";
 import { createWorkPlan } from "@/features/v1/planner/actions/work-plan-action";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { Platform } from "@/features/types/platform";
 
 const WorkPlanForm = ({
   line_id,
   work_day_id,
   str_date,
   onSuccess,
+  platforms,
 }: {
   line_id: string;
   work_day_id: string;
   str_date: string;
   onSuccess: () => void;
+  platforms: Platform[];
 }) => {
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const { platforms } = useFetchPlatforms();
+
   const [formValues, setFormValues] = useState({
     platform_id: "",
     planned_hours: "",

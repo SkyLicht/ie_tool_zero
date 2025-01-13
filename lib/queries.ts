@@ -64,8 +64,16 @@ export const StationsRequestQuery = () => {
     },
   };
 };
+
+export const GET_ALL_PLATFORMS = () => {
+  return {
+    SERVER: {
+      GET_ALL_PLATFORMS_IN_SERVICE: `${process.env.FASTAPI_URL}/api/v1/platform/get_all_in_service`,
+    },
+  };
+};
 export const GET_ALL_LAYOUTS = `${process.env.FASTAPI_URL}/api/v1/layout/get_layouts`;
 // client
 
 export const UPDATE_LAYOUT = `${api}/api/v1/layout/update_layout`;
-export const GET_ALL_PLATFORMS_IN_SERVICE = `${api}/api/v1/platform/get_all_in_service`;
+//export const GET_ALL_PLATFORMS_IN_SERVICE = `${api}/api/v1/platform/get_all_in_service`;

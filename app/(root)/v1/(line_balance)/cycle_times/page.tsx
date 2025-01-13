@@ -1,17 +1,13 @@
 "use server";
 import React from "react";
 import ActionLinesForm from "@/features/v1/components/forms/ActionLinesForm";
-import { auth } from "@/auth";
 import { getLinesGroupedByFactoryV2 } from "@/features/request/request-line";
 import ViewLineBalance from "@/features/v1/line_balance/components/view-line-balance";
 import { catchErrorTyped, customPackagedError } from "@/lib/licht-request";
+import { getServerSideProps } from "@/lib/service-side";
 
 const CycleTimePage = async () => {
-  const session = await auth();
-
-  if (!session) {
-    return <p className={"font-bold"}>You are not logged in!</p>;
-  }
+  const session = await getServerSideProps();
 
   const [error, lines] = await catchErrorTyped(
     getLinesGroupedByFactoryV2(session?.user.token),

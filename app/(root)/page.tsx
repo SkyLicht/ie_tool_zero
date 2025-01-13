@@ -1,12 +1,8 @@
-import { auth } from "@/auth";
 import React from "react";
+import { getServerSideProps } from "@/lib/service-side";
 
 export default async function Home() {
-  const session = await auth();
-
-  if (!session) {
-    return <p className={"font-bold"}>You are not logged in!</p>;
-  }
+  const session = await getServerSideProps();
 
   return (
     <div>
