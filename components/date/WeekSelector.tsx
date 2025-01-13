@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useMemo } from "react";
 
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
@@ -17,9 +17,11 @@ type Props = {
   onWeekChange: (week: number) => void;
 };
 const WeekSelector = ({ year, week, onWeekChange }: Props) => {
-  const [weeks, setWeeks] = React.useState<
-    { weekNumber: number; days: { name: string; date: string }[] }[]
-  >(WeekInfo.getAllWeeks(year));
+  // const [weeks, set] = React.useState<
+  //   { weekNumber: number; days: { name: string; date: string }[] }[]
+  // >(WeekInfo.getAllWeeks(year));
+
+  const weeks = useMemo(() => WeekInfo.getAllWeeks(year), [year]);
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState<number>(week);
 

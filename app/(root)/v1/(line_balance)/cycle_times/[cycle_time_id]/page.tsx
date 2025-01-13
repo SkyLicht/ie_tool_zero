@@ -1,6 +1,5 @@
 "use server";
 import React from "react";
-import { auth } from "@/auth";
 import ViewTakes from "@/features/v1/line_balance/components/line_balance/view-takes";
 import ViewCycleTimes from "@/features/v1/line_balance/components/line_balance/view-cycle-times";
 import { getServerSideProps } from "@/lib/service-side";

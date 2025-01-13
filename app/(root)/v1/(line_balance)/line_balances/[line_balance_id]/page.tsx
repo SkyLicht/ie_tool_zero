@@ -1,6 +1,5 @@
 "use server";
 import React from "react";
-import { auth } from "@/auth";
 import { catchErrorTyped, customPackagedError } from "@/lib/licht-request";
 import { getLineBalanceById } from "@/features/request/request-line_balance";
 import ChartLineBalanceContainer from "@/features/v1/line_balance/components/line_balance_statics/chart-line-balance-container";
@@ -10,7 +9,6 @@ import { getServerSideProps } from "@/lib/service-side";
 
 const LineBalancePage = async ({
   params,
-  searchParams,
 }: {
   params: Promise<{ line_balance_id: string }>;
   searchParams: Promise<{ [key: string]: string | undefined }>;

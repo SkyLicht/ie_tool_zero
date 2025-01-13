@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import WeekSelector from "@/components/date/WeekSelector";
 import DaysContainer from "@/components/date/DaysContainer";

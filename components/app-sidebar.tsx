@@ -2,7 +2,6 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
@@ -10,7 +9,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
-  SidebarMenuSubItem,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import {
@@ -108,7 +106,7 @@ export const AppSidebar = async () => {
       <SidebarContent className="overflow-x-hidden ">
         <SidebarGroupLabel>Application</SidebarGroupLabel>
         <SidebarGroupContent>
-          {APPLICATIONS.map((item, index) => (
+          {APPLICATIONS.map((item) => (
             <SidebarMenu key={item.id}>
               <Collapsible defaultOpen className="group/collapsible ">
                 <SidebarMenuItem>

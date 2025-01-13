@@ -89,8 +89,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       // When user is returned (e.g., on login), attach data to the token
       if (user) {
         token.id = user.id;
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         token.name = user.username;
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         token.routes = user.routes;
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         token.accessToken = user.access_token;
       }
       return token;
@@ -98,15 +104,25 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ session, token }) {
       // Make session data available in the client
       if (token) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         session.sessionToken = token.accessToken;
         const { id, name, routes } = token;
 
         session.user = {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
           id: id,
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
           name: name,
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
           routes: routes,
           email: "",
           image: "",
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
           token: token.accessToken,
           emailVerified: new Date(), // remove in the furtureq
         };

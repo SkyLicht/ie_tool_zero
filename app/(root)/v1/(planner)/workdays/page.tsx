@@ -1,7 +1,7 @@
 import React from "react";
 
 const WorkDaysPage = () => {
-  return <></>;
+  return <div>workdays</div>;
 };
 
 export default WorkDaysPage;

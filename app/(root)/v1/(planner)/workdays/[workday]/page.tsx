@@ -22,6 +22,10 @@ const WorkDayPage = async ({
     [...customPackagedError, Error],
   );
 
+  if (error_platform) {
+    return <p>not platforms</p>;
+  }
+
   const [error, work_days] = await catchErrorTyped(
     getWorkDaysByDate(session.user.token, workday),
     [...customPackagedError, Error],
